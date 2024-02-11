@@ -36,10 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'playground',
     'channels',
     'daphne',
     'django.contrib.staticfiles',
-    'playground',
 ]
 
 MIDDLEWARE = [

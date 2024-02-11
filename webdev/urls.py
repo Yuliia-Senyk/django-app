@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from playground import views
 
 urlpatterns = [
+    path('', views.get_main),
+    path('ws/', views.my_websocket),
     path('admin/', admin.site.urls),
     path("playground/", include("playground.urls")),
 ]
