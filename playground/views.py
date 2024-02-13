@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from django.conf import settings
 import os
@@ -33,12 +32,17 @@ def get_cookie(request):
 
 def get_headers(request):
         allheaders = request.META
-        my_cookie_value = allheaders.get('my_cookie', 'Cookie not set')
+        my_cookie_value = allheaders.get('my_header', 'Header not set')
         # user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown User Agent')
         return HttpResponse(allheaders)
 
 
-
+def set_headers(request):
+    # Create an HttpResponse with the headers
+    response = HttpResponse("Headers", content_type="text/plain")
+    # Set or update headers
+    response['X-Custom-Header'] = 'Custom Value'
+    return response
 
 def sayHello(request):
     return HttpResponse("Hello, Django!")
@@ -59,7 +63,13 @@ def sayBig(request):
     return render(request, 'hello.html')
 
 def sayBigCustom(request):
-    return render(request, 'hello-custom.html', {'username': 'Beauty', 'items': [{'name': 'Taras'}, {'name': 'Jessy'}]})
+    return render(request, 'hello-custom.html', {'username': 'Beauty', 'items': [{'name': 'Taras'}, {'name': 'Jessy'}], 'my_path': 'hehehey'})
+
+
+
+def openHelloPage(request, random):
+    # context = {'random': random}
+    return render(request, 'hello.html')
 
 
 
@@ -80,7 +90,6 @@ def get_users(request):
         return JsonResponse({'username': 'user.name'})
 
     except Exception as e:
-        # If there's an error, return an error message
         return JsonResponse({'status': 'error', 'message': str(e)})
     
     
@@ -102,9 +111,6 @@ def deleteSmth(request, *args, **kwargs):
     data = {'message': 'DELETE request received'}
     return JsonResponse(data)
 
-
-    import os
-
 def sendImage(request):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     print('BASE_DIR' + BASE_DIR);
@@ -113,6 +119,12 @@ def sendImage(request):
 
     image_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'img.png')
     return FileResponse(open(image_path, 'rb'), content_type='image/png')
+
+def my_websocket(request):
+    return render(request, 'websocket.html')
+
+def get_main(request):
+    return render(request, 'main-page.html')
 
 
 @csrf_exempt

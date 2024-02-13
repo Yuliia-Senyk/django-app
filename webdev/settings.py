@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'playground',
+    'channels',
+    'daphne',
     'django.contrib.staticfiles',
-    'playground'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 ROOT_URLCONF = 'webdev.urls'
 
@@ -68,7 +76,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'webdev.wsgi.application'
+# WSGI_APPLICATION = 'webdev.wsgi.application'
+ASGI_APPLICATION = 'webdev.asgi.application'
 
 
 # Database

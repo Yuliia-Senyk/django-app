@@ -19,5 +19,8 @@ urlpatterns = [
 
 
     path('users/', views.get_users),
+    path('ws/', views.my_websocket),
+
+    path('<str:random>/', views.openHelloPage, name='random'),
 
 ]
