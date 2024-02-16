@@ -5,16 +5,62 @@ import json
 from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-# from hello2 import documents
-# from mongoengine import Document, StringField
-# from .models import User
+
+import playground.helpers as helpers
+
+@csrf_exempt
+def handle_db(request):
+    if request.method == 'GET':
+        res = helpers.read_many_documents()
+        print(res)
+        return render(request, 'db-test.html', {'items': res} )
+    elif request.method == 'POST':
+        helpers.create_one_document()
+        res = helpers.read_many_documents()
+        print(res)
+        return render(request, 'db-test.html', {'items': res} )
+    elif request.method == 'PUT':
+        helpers.update_one_document()
+        res = helpers.read_many_documents()
+        print(res)
+        return render(request, 'db-test.html', {'items': res} )
+    elif request.method == 'DELETE':
+        helpers.delete_one_document()
+        res = helpers.read_many_documents()
+        print(res)
+        return render(request, 'db-test.html', {'items': res} )
+    else:
+        return JsonResponse({'message': 'Unsupported HTTP method'})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def set_cookie(request):
     response = HttpResponse("Cookie set!")
     response.set_cookie('my_cookie', 'Hello from server!')
     response.set_cookie('my_cookieHttpOnly', 'Hello from server!',  httponly=True)
-
     return response
 
 def get_cookie(request):
@@ -24,12 +70,6 @@ def get_cookie(request):
     return HttpResponse(f"Value of my_cookie: {my_cookie_value}")
 
 
-# user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown User Agent')
-#     print(f'Received request from user agent: {user_agent}')
-#     allheaders = request.META
-#     print(f'allheaders: {allheaders}')
-#     print(request.COOKIES)
-
 def get_headers(request):
         allheaders = request.META
         my_cookie_value = allheaders.get('my_header', 'Header not set')
@@ -38,14 +78,12 @@ def get_headers(request):
 
 
 def set_headers(request):
-    # Create an HttpResponse with the headers
     response = HttpResponse("Headers", content_type="text/plain")
-    # Set or update headers
     response['X-Custom-Header'] = 'Custom Value'
     return response
 
 def sayHello(request):
-    return HttpResponse("Hello, Django!")
+    return render(request, 'playground-main.html')
 
 def sendJSON(request):
     return JsonResponse({'message': 'JSON received'})
