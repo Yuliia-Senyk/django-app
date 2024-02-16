@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Template</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+
+</head>
+<body>
+    
+    <h1>data base</h1>
+
+    <h2>all {{items|length}} items</h2>
+    <div>
+        
+        {% if items %}
+            {% for item in items %}
+                <p>{{ item.name }} <b>{{ item.age }}</b> <i>{{ item.date|date:"Y-m-d" }} </i></p>
+            {% endfor %}
+        {% else %}
+            <p>No items</p>
+        {% endif %}
+    </div>
+
+    <button onclick="addClick()">add one more</button>
+    <button onclick="updateClick()">update the first one</button>
+    <button onclick="deleteClick()">delete the first one</button>
+
+    <div id="output"></div>
+
+    <script src="{% static 'scripts/mongo-interactions.js' %}" defer></script>
+</body>
+</html>
+
