@@ -78,6 +78,7 @@ TEMPLATES = [
 
 # WSGI_APPLICATION = 'webdev.wsgi.application'
 ASGI_APPLICATION = 'webdev.asgi.application'
+NODE_ENDPOINT = 'http://localhost:3400/django'
 
 
 # Database

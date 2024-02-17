@@ -32,31 +32,6 @@ def handle_db(request):
     else:
         return JsonResponse({'message': 'Unsupported HTTP method'})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def set_cookie(request):
     response = HttpResponse("Cookie set!")
     response.set_cookie('my_cookie', 'Hello from server!')
@@ -84,9 +59,6 @@ def set_headers(request):
 
 def sayHello(request):
     return render(request, 'playground-main.html')
-
-def sendJSON(request):
-    return JsonResponse({'message': 'JSON received'})
 
 def sendHtml(request):
     return render(request, 'hello.html')
