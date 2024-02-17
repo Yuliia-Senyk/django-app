@@ -14,8 +14,8 @@ urlpatterns = [
     # better to have separate django app
     # that redirects all requests with url 'express'
     # to your express app. 
-    path("express", viewsNode.redirect_GET_req_to_express),
-    path("express/post", viewsNode.redirect_POST_req_to_express),
+    path("redirectGet", viewsNode.redirect_GET_req_to_express),
+    path("redirectPost", viewsNode.redirect_POST_req_to_express),
 
 
     path("hello/big", views.sayBig),
