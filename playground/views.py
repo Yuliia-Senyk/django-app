@@ -131,7 +131,7 @@ def sendImage(request):
     return FileResponse(open(image_path, 'rb'), content_type='image/png')
 
 def my_websocket(request):
-    return render(request, 'websocket.html')
+    return render(request, 'chat.html')
 
 def get_main(request):
     return render(request, 'main-page.html')
