@@ -67,7 +67,6 @@ class YourConsumer(AsyncConsumer):
         await self.channel_layer.group_discard(room_name, self.channel_name)
 
 
-
     async def chat_message(self, event):
         print(event)
         message = event['text']

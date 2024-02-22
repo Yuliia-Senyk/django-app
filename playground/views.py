@@ -69,8 +69,14 @@ def sendImage(request):
 
 
 
-def sayBig(request):
-    return render(request, 'hello.html')
+def errorView(request):
+    try:
+        raise Exception({'msg': "This is a simulated exception"})
+        return render(request, 'hello.html')
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    
 
 def sayBigCustom(request):
     return render(request, 'hello-custom.html', {'username': 'Beauty', 'items': [{'name': 'Taras'}, {'name': 'Jessy'}], 'my_path': 'hehehey'})

@@ -18,7 +18,7 @@ urlpatterns = [
     path("redirectPost", viewsNode.redirect_POST_req_to_express),
 
 
-    path("hello/big", views.sayBig),
+    path("error", views.errorView),
     path("hello/custom", views.sayBigCustom),
     path("crud/", views.handleCrud),
     path('set_cookie/', views.set_cookie),
