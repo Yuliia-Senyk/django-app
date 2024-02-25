@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from webdev.settings import NODE_ENDPOINT 
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.views.decorators.cache import cache_page
 
 def redirect_GET_req_to_express(request):
     try:
@@ -44,4 +45,13 @@ def send_random_JSON(request):
         return JsonResponse({'message': 'JSON from django on POST request'})
     else:
         return JsonResponse({'message': 'Unsupported HTTP method'})
+    
+
+import logging
+logger = logging.getLogger('django.core.cache.backends.cache')
+
+
+@cache_page(60 * 30) 
+def cached_page(request):
+    return JsonResponse({'message': 'cached data'})
     

@@ -7,6 +7,8 @@ urlpatterns = [
     path("image", views.sendImage),
     path("html", views.sendHtml),
 
+    path("cached", viewsNode.cached_page),
+
      # endpoint that reads req and sends any json
      path("json", viewsNode.send_random_JSON), 
     
